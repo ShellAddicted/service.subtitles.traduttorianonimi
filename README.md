@@ -1,5 +1,5 @@
 # service.subtitles.traduttorianonimi
-[Kodi Addon] Servizio Sottotitoli per [traduttorianonimi.weebly.com](http://traduttorianonimi.weebly.com/)
+[Kodi Addon] Servizio Sottotitoli per [www.traduttorianonimi.it](http://www.traduttorianonimi.it/)
 
 # Come Installare / How to Install
 - Scarica il File Zip / Download Zip:<br />
