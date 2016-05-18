@@ -137,6 +137,9 @@ class TraduttoriAnonimi:
     def GrabSubtitle(self,ShowName,Season,Episode):
         ShowsResults=self.ShowsList[ShowName]
         EpisodeRegex=re.compile("(?P<tvshowname>.+)(?:(?:\s|s|\.)|\.s|\.so)(?P<season>\d+)(?:x|e|\.x|\.e)(?P<episode>\d+)", re.IGNORECASE);
+        if (ShowsResults == None):
+            self.log.info("No ShowsResults");
+            return [];
         for show in ShowsResults:
             r=RetriveURL(show["URL"]);
             if (r!=None):
