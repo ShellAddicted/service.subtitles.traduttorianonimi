@@ -34,27 +34,27 @@ import zipfile;
 import StringIO;
 import traceback;
 
-__addon__ = xbmcaddon.Addon();
-__author__ = __addon__.getAddonInfo("author");
-__scriptid__ = __addon__.getAddonInfo("id");
-__scriptname__ = __addon__.getAddonInfo("name");
-__version__ = __addon__.getAddonInfo("version");
-__language__ = __addon__.getLocalizedString;
+addon = xbmcaddon.Addon();
+author = addon.getAddonInfo("author");
+scriptid = addon.getAddonInfo("id");
+scriptname = addon.getAddonInfo("name");
+version = addon.getAddonInfo("version");
+language = addon.getLocalizedString;
 main_url = "http://traduttorianonimi.it";
 
-__cwd__ = xbmc.translatePath(__addon__.getAddonInfo("path")).decode("utf-8");
-__profile__ = xbmc.translatePath(__addon__.getAddonInfo("profile")).decode("utf-8");
-__resource__ = xbmc.translatePath(os.path.join(__cwd__, "resources", "lib")).decode("utf-8");
-__temp__ = xbmc.translatePath(os.path.join(__profile__, "temp","")).decode("utf-8");
+cwd = xbmc.translatePath(addon.getAddonInfo("path")).decode("utf-8");
+profile = xbmc.translatePath(addon.getAddonInfo("profile")).decode("utf-8");
+resource = xbmc.translatePath(os.path.join(cwd, "resources", "lib")).decode("utf-8");
+temp = xbmc.translatePath(os.path.join(profile, "temp","")).decode("utf-8");
         
-sys.path.append(__resource__)
+sys.path.append(resource)
 
 import TraduttoriAnonimi
 
-def log(msg, force = True):
-    xbmc.log(("""*** [{}] -> {}""".format(__scriptname__,msg)).encode("utf-8"), level = xbmc.LOGNOTICE)
+def log(msg):
+    xbmc.log(("""*** [{}] -> {}""".format(scriptname,msg)).encode("utf-8"), level = xbmc.LOGNOTICE)
     
-def notify(msg,header=__scriptname__,time=5000,image=None):
+def notify(msg,header=scriptname,time=5000,image=None):
     if (image!=None):
         xbmc.executebuiltin((u"Notification({},{},{},{})".format(header, msg,time,image)).encode("utf-8"))
     else:
@@ -93,7 +93,7 @@ def search(item):
                         subs=download(result["URL"])
                         for sub in subs:
                             listitem = xbmcgui.ListItem(label='Italian',label2=os.path.basename(sub),thumbnailImage='it') #sub["Name"]
-                            xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = "plugin://{}/?action=download&url={}".format(__scriptid__,sub), listitem = listitem, isFolder = False)#sub["URL"]
+                            xbmcplugin.addDirectoryItem(handle = int(sys.argv[1]), url = "plugin://{}/?action=download&url={}".format(scriptid,sub), listitem = listitem, isFolder = False)#sub["URL"]
                         xbmcplugin.endOfDirectory(int(sys.argv[1]))	# send end of directory to XBMC
             else:
                 notify("i sottotitoli sono disponibili solo per le serie tv il supporto ad i Film sara' aggiunto in futuro",time=12000)
@@ -122,17 +122,17 @@ def download(url):
             q=zipfile.ZipFile(tmp);
             for name in q.namelist():
                 if (name.split(".")[-1] in exts):
-                    q.extract(name, __temp__)
-                    out.append(os.path.join(__temp__,name))
+                    q.extract(name, temp)
+                    out.append(os.path.join(temp,name))
             q.close();
         else:
             log("Unpacked file detected")
             try:
                 if (os.path.basename(url).split(".")[-1] in exts):
-                    q=open(os.path.join(__temp__,os.path.basename(url)),"wb")
+                    q=open(os.path.join(temp,os.path.basename(url)),"wb")
                     q.write(content)
                     q.close()
-                    out.append(os.path.join(__temp__,os.path.basename(url)))
+                    out.append(os.path.join(temp,os.path.basename(url)))
                 else:
                     log("Downloaded File ({}) is not in exts[{}]".format(os.path.basename(url),str(exts)))
             except Exception as exc:
@@ -142,9 +142,9 @@ def download(url):
     return out;
 
 def main():
-    log("Application version: {}".format(__version__))
+    log("Application version: {}".format(version))
     if (xbmc.Player().isPlayingVideo()):
-        for x in [__profile__,__temp__]:
+        for x in [profile,temp]:
             if (not xbmcvfs.exists(x)):
                 xbmcvfs.mkdirs(x)
     params = GetParams()

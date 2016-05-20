@@ -6,3 +6,9 @@
 - Code:
 -  Source Code Cleanup
 -  Now using bs4 from shared module script.module.beautifulsoup4
+
+2.0.1
+- Feautures -> Nothing
+- Code:
+-  variable name style like "__addon__" replaced with "addon"
+-  added tag source in addon.xml
