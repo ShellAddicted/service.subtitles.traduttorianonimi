@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+
+<strings>
+    <string id="30001">Network Error. Check your Connection</string>
+    <string id="30002">The Subtitles are available only for TV Shows,MOVIES will be supported in future</string>
+    <string id="30003">The Subtitles are available only in Italian,Check Your Kodi Settings [Video->Subtitles->Languages to download subtitles for]</string>
+    <string id="30004">The Manual Search is not supported yet, but it will be in the future.</string>
+</strings>
+
