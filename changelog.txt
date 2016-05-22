@@ -19,3 +19,8 @@
 -  Support for unicode(utf-8) TV Shows Name
 -  deleted duplicated functions and variables from service.py and traduttorianonimi.py, now they are shared by util.py
 -  Localized Notfications (Italian,English)
+
+2.0.3
+- Feautures -> Nothing
+- Code:
+    Converted strings.xml to strings.po

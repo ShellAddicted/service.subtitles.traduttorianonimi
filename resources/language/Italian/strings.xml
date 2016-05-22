@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-
-<strings>
-    <string id="30001">Errore di rete. controlla la tua connessione</string>
-    <string id="30002">I sottotitoli sono disponibili solo per le serie TV,i FILM saranno supportati in futuro</string>
-    <string id="30003">I sottotitoli sono disponibili solo in lingua italiana,controlla le tue impostazioni di Kodi [Video->Sottotitoli->Lingue per cui scaricare i sottotitoli]</string>
-    <string id="30004">La Ricerca Manuale Non e' supportata ma verra' aggiunta in futuro</string>
-</strings>
-
