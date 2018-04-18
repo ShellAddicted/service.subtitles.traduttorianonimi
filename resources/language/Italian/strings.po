@@ -1,7 +1,7 @@
 # XBMC Media Center language file
 # Addon Name: traduttorianonimi.it
 # Addon id: service.subtitles.traduttorianonimi
-# Addon version: 2.2.0
+# Addon version: 2.2.1
 # Addon Provider: shelladdicted
 msgid ""
 msgstr ""

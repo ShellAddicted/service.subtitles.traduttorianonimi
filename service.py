@@ -18,7 +18,7 @@
 __author__ = "ShellAddicted"
 __copyright__ = "Copyright 2018, ShellAddicted"
 __license__ = "GPL"
-__version__ = "2.2.0"
+__version__ = "2.2.1"
 __maintainer__ = "ShellAddicted"
 __email__ = "shelladdicted@gmail.com"
 __status__ = "Development"
@@ -68,16 +68,35 @@ if not os.path.isfile(NotifyLogo):
 def notify(message, header=scriptname, icon=NotifyLogo, time=5000):
     dialog.notification(header, message, icon=icon, time=time)
 
-class LogStream(object):
-    def write(self, data):
-        xbmc.log("*** [service.subtiles.traduttorianonimi] -> {0}".format(data.encode('utf-8', "ignore")),
-                 level=xbmc.LOGNOTICE)
+class KodiLogHandler(logging.StreamHandler):
+    _levels = {
+        logging.CRITICAL: xbmc.LOGFATAL,
+        logging.ERROR: xbmc.LOGERROR,
+        logging.WARNING: xbmc.LOGWARNING,
+        logging.INFO: xbmc.LOGINFO,
+        logging.DEBUG: xbmc.LOGDEBUG,
+        logging.NOTSET: xbmc.LOGNONE,
+    }
+
+    def __init__(self):
+        logging.StreamHandler.__init__(self)
+        addon_id = xbmcaddon.Addon().getAddonInfo('id')
+        formatter = logging.Formatter(b'[{}]'.format(addon_id) + b'{%(levelname)s} %(name)s.%(funcName)s() -->> %(message)s')
+        self.setFormatter(formatter)
+
+    def emit(self, record):
+        try:
+            xbmc.log(self.format(record), self._levels[record.levelno])
+        except UnicodeEncodeError:
+            xbmc.log(self.format(record).encode(
+                'utf-8', 'ignore'), self._levels[record.levelno])
+
+    def flush(self):pass
 
 logging.basicConfig(
     level=logging.INFO,
-    format="{%(levelname)s} %(name)s.%(funcName)s() -->> %(message)s",
     handlers=[
-        logging.StreamHandler(LogStream())
+        KodiLogHandler()
     ]
 )
 log = logging.getLogger("TraduttoriAnonimiKodiService")

@@ -44,3 +44,8 @@
     parser is now fully compatible with new website structure
 - Code:
     Code Cleanup
+
+2.2.1
+- Feautures: jarvis compatiblity (fix)
+- Code:
+    new logging method
